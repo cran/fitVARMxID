@@ -1,8 +1,14 @@
+# fitVARMxID 1.0.3
+
+## Patch
+
+* Edits to documentation.
+
 # fitVARMxID 1.0.2
 
 ## Patch
 
-* CRAN resubmission.
+* Initial CRAN release.
 
 # fitVARMxID 1.0.1
 

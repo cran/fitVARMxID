@@ -58,9 +58,9 @@ x_recovered
 
 }
 \seealso{
-Other VAR Functions: 
-\code{\link{FitVARMxID}()},
-\code{\link{LDL}()}
+Other VAR Functions:
+\code{\link[=FitVARMxID]{FitVARMxID()}},
+\code{\link[=LDL]{LDL()}}
 }
 \author{
 Ivan Jacob Agaloos Pesigan

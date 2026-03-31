@@ -170,16 +170,22 @@ if \code{beta_fixed = FALSE}, these are starting values.
 If \code{NULL}, defaults to a diagonal matrix
 with -0.001 when \code{ct = TRUE} and 0.001 when \code{ct = FALSE}.}
 
-\item{beta_lbound}{Numeric matrix of lower bounds for \code{beta}.
-If \code{NULL}, defaults to -2.5.
-Ignored if \code{beta_fixed = TRUE}.}
+\item{beta_lbound}{Numeric matrix.
+Lower bounds for \code{beta}.
+Ignored if \code{beta_fixed = TRUE}.
+If \code{NULL} and \code{ct = FALSE},
+defaults to \code{-2.5}.
+If \code{NULL} and \code{ct = TRUE},
+defaults to \code{NA}.}
 
 \item{beta_ubound}{Numeric matrix.
 Upper bounds for \code{beta}.
 Ignored if \code{beta_fixed = TRUE}.
-If \code{NULL}, defaults to \code{+2.5}.
+If \code{NULL} and \code{ct = FALSE},
+defaults to \code{+2.5}.
 If \code{NULL} and \code{ct = TRUE},
-diagonal upper bounds are set to \code{-1e-05}.}
+diagonal upper bounds are set to \code{-1e-05}
+and the off-diagonals are set to \code{NA}.}
 
 \item{psi_diag}{Logical.
 If \code{TRUE}, \code{psi} is diagonal.
@@ -564,7 +570,7 @@ for the dynamic structure is given by
   \boldsymbol{\alpha}_{i}
   +
   \boldsymbol{\beta}_{i}
-  \boldsymbol{\eta}_{i, t - 1}
+  \boldsymbol{\eta}_{i, t}
   \right)
   \mathrm{d} t
   +
@@ -583,7 +589,7 @@ If \code{center = TRUE}, the dynamic structure is parameterized as follows
   =
   \boldsymbol{\beta}_{i}
   \left(
-    \boldsymbol{\eta}_{i, t - 1}
+    \boldsymbol{\eta}_{i, t}
     -
     \boldsymbol{\mu}_{i}
   \right)
@@ -607,11 +613,11 @@ alpha <- rep(x = 0, times = p)
 beta <- 0.50 * diag(p)
 psi <- 0.001 * diag(p)
 psi_l <- t(chol(psi))
-mu0 <- simStateSpace::SSMMeanEta(
+mu0 <- SSMMeanEta(
   beta = beta,
   alpha = alpha
 )
-sigma0 <- simStateSpace::SSMCovEta(
+sigma0 <- SSMCovEta(
   beta = beta,
   psi = psi
 )
@@ -676,9 +682,9 @@ OpenMx 2.0: Extended structural equation and statistical modeling.
 \doi{10.1007/s11336-014-9435-8}
 }
 \seealso{
-Other VAR Functions: 
-\code{\link{LDL}()},
-\code{\link{Softplus}()}
+Other VAR Functions:
+\code{\link[=LDL]{LDL()}},
+\code{\link[=Softplus]{Softplus()}}
 }
 \author{
 Ivan Jacob Agaloos Pesigan
