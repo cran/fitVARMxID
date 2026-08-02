@@ -67,20 +67,41 @@ lapply(
       robust = TRUE,
       seed = 42
     )
+    sav <- FitVARMxIDSave(
+      data = data,
+      observed = paste0("y", seq_len(k)),
+      id = "id",
+      ct = TRUE,
+      time = "time",
+      center = FALSE,
+      alpha_fixed = TRUE,
+      alpha_values = alpha,
+      robust = TRUE,
+      seed = 42
+    )
     if (ci) {
       print(fit)
       print(fit, means = TRUE)
       summary(fit)
       summary(fit, means = TRUE)
-      summary(fit, var_metric = "logvar")
-      summary(fit, var_metric = "softplusvar")
       coef(fit)
-      coef(fit, var_metric = "logvar")
-      coef(fit, var_metric = "softplusvar")
       vcov(fit)
-      vcov(fit, var_metric = "logvar")
-      vcov(fit, var_metric = "softplusvar")
       vcov(fit, robust = TRUE)
+      confint(fit)
+      confint(fit, robust = TRUE)
+      plot(fit)
+      plot(fit, robust = TRUE)
+      print(sav)
+      print(sav, means = TRUE)
+      summary(sav)
+      summary(sav, means = TRUE)
+      coef(sav)
+      vcov(sav)
+      vcov(sav, robust = TRUE)
+      confint(sav)
+      confint(sav, robust = TRUE)
+      plot(sav)
+      plot(sav, robust = TRUE)
     }
     testthat::test_that(
       paste(text, "converged"),
